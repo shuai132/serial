@@ -675,6 +675,7 @@ class SerialException : public std::exception
   SerialException& operator=(const SerialException&);
   std::string e_what_;
 public:
+  SerialException() {};
   SerialException (const char *description) {
       std::stringstream ss;
       ss << "SerialException " << description << " failed.";
@@ -687,7 +688,7 @@ public:
   }
 };
 
-class IOException : public std::exception
+class IOException : public SerialException
 {
   // Disable copy constructors
   IOException& operator=(const IOException&);
@@ -726,7 +727,7 @@ public:
   }
 };
 
-class PortNotOpenedException : public std::exception
+class PortNotOpenedException : SerialException
 {
   // Disable copy constructors
   const PortNotOpenedException& operator=(PortNotOpenedException);
